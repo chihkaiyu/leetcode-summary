@@ -53,8 +53,34 @@ class Solution:
 
 # Solution 2
 ## Explanation
-DP
+定義一個二維陣列，其中 `dp[i][j]` 表示從 `piles[i]` 至 `piles[j]` 中，Alex 與 Lee 的石頭差異數量最大化。  
+例如 Alex 先選擇，他可以選 `piles[i]` 或是 `piles[j]`：  
+1. 若 Alex 選擇 `piles[i]`，則其結果是 `piles[i] - dp[i + 1][j]`
+2. 若 Alex 選擇 `piles[j]`，則其結果是 `piles[j] - dp[i][j - 1]`
+
+若輸入為 `[5,3,4,5]`，則 `dp[1][3]` 表示 `piles[1]` 至 `piles[3]` 中，Alex 所能拿到的石頭數量，減掉 Lee 所能拿到的石頭數量最大化，其結果為 4。因為 Alex 先選，而他能選到 `piles[3]` 及 `piles[1]`，而 Lee 能選到 `piles[2]`，其差異為 4。  
+
+所以能得出下列公式：  
+`dp[i][j] = max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j - 1])`
+
 
 ## Source Code
+```python
+class Solution:
+    def stoneGame(self, piles: 'List[int]') -> 'bool':
+        n = len(piles)
+        dp = [[0] * n for i in range(n)]
+        for i in range(n):
+            dp[i][i] = piles[i]
+        for d in range(1, n):
+            for i in range(n - d):
+                dp[i][i + d] = max(piles[i] - dp[i + 1][i + d], piles[i + d] - dp[i][i + d -1])
+        return dp[0][-1] > 0
+```
 
 ## Analysis
+- Time: `O(n^2)`
+- Space: `O(n^2)`
+
+# Remark
+- https://www.youtube.com/watch?v=WxpIHvsu1RI

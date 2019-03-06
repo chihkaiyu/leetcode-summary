@@ -71,4 +71,4 @@ class Solution:
 
 ## Analysis
 - Time: `O(node)`
-- Space: `O(node)`
+- Space: `O(maxTreeLevel)`

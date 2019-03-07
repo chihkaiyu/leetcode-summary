@@ -45,5 +45,5 @@ class Solution:
 ```
 
 ## Analysis
-- Time: `O(edges*maxPathLength)`
-- Space: `O(edges*maxPathLength)`
+- Time: `O(n!)`
+- Space: `O(n!)`
